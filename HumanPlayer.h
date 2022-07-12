@@ -6,7 +6,4 @@ class HumanPlayer : public Player {
 
 public:
 	HumanPlayer();
-
-private:
-	std::string name;
 };

@@ -11,10 +11,12 @@ public:
 	int chooseDifficultyLevel();
 	void displayResult(std:: string name);    // kto wygral z gameHndler + czas rozgrywki 
 	int getDifficultyLevel();
+	void gameMode();
+	void displayBoard();
 	static int takeNumber(int rangeStart, int rangeEnd);
 	static char takeLetter(char rangeStart, char rangeEnd);
 
 private:
-	int difficultyLevel;
-	int choice;
+	int choice;   //  Menu :: 1 start . 2 help 3. exit
+	bool mode;   // 0 - human  1 -computer
 };

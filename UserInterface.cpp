@@ -15,7 +15,7 @@ void UserInterface::welcomeScreen()
 
 int UserInterface::getUserMenuChoice()
 {
-	std::string input{};
+	/*std::string input{};
 	while (true) {
 		welcomeScreen();
 
@@ -30,9 +30,9 @@ int UserInterface::getUserMenuChoice()
 			system("pause");
 			system("cls");
 		}
-	}
-	return std::stoi(input);
-
+	}*/
+	welcomeScreen();
+	return UserInterface::takeNumber(1, 3);
 }
 
 void UserInterface::mainMenu(int choice)
@@ -155,27 +155,74 @@ void UserInterface::displayEndGameSign()
 
 int UserInterface::chooseDifficultyLevel()
 {
-	std::string input;
-	int userLevel;
+	//std::string input;
+	int userLevel = 0;
 	std::cout << "\tPlease choose difficulty level:\n\t1. Begginer – 9 x 9 Board and 10 Mines"
 		"\n\t2. Intermediate – 16 x 16 Board and 40 Mines\n\t 3. Advanced  – 24 x 24 Board and 99 Mines";
 	std::cout << "\t>> ";
-	std::getline(std::cin, input);
+	/*std::getline(std::cin, input);
 
 	if ((input == "1") || (input == "2") || (input == "3"))
 		userLevel = stoi(input);
+
+	if (userLevel == 1)
+		userLevel = 9;
+	else if (userLevel == 2)
+		userLevel = 16;
+	else if (userLevel == 3)
+		userLevel = 24;
+
 	else {
 		std::cout << "Invalid input. Try again!\n" << std::endl;
 
 		system("pause");
 		system("cls");
-	}
+	}*/
+	userLevel = takeNumber(1, 3);
+
+	if (userLevel == 1)
+		userLevel = 9;
+	else if (userLevel == 2)
+		userLevel = 16;
+	else if (userLevel == 3)
+		userLevel = 24;
+
 	return userLevel;
 }
 
-void UserInterface::displayResult(std::string name)
+void UserInterface::displayResult(std::string name)        // funkcja przyjmuje start zegara i stop jako argumenty
 {
 	std::cout << "\n\t\tThe winner is... " << name << std::endl;
+
+	clock_t start, stop;      // to trzeba zaicludowac do game loop 
+	float game_duration;
+
+	game_duration = (float)(stop - start) / CLOCKS_PER_SEC;
+	int game_duration_min = game_duration / 60;
+	float game_duration_sec = (int)game_duration % 60;
+
+
+	printf("Game duration: %d minutes and %.f seconds. ", game_duration_min, game_duration_sec);
+
+}
+
+void UserInterface::gameMode()
+{
+	std::string input;
+	std::cout << "Please choose game mode: \n\t 0. Human Player \n\t 1. Computer Player" << std::endl;
+	
+	std::cout << "\t>> ";
+	std::getline(std::cin, input);
+
+	if ((input == "0") || (input == "1"))
+		mode = stoi(input);
+}
+
+void UserInterface::displayBoard()
+{
+
+
+
 }
 
 int UserInterface::takeNumber(int rangeStart, int rangeEnd) {
@@ -233,4 +280,5 @@ char UserInterface::takeLetter(char rangeStart, char rangeEnd) {
 			std::cout << "Look, you've reached out of the allowed range" << std::endl;
 		}
 	} while (letter < rangeStart || letter > rangeEnd);
+	return letter;
 }

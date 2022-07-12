@@ -8,9 +8,10 @@ class Player {
 
 public:
 	virtual std::vector <int> chooseCoordinates() = 0;
+	void setDifficultyLevel(int x) ;
 
 protected:
 	//board::Board;
-	
-	
+	std::string name;
+	int difficultyLevel;
 };
