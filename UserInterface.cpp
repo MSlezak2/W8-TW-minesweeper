@@ -150,15 +150,17 @@ void UserInterface::displayEndGameSign()
 
 }
 
-void UserInterface::chooseDifficultyLevel()
+int UserInterface::chooseDifficultyLevel()
 {
+	std::string input;
+	int userLevel;
 	std::cout << "\tPlease choose difficulty level:\n\t1. Begginer – 9 x 9 Board and 10 Mines"
 		"\n\t2. Intermediate – 16 x 16 Board and 40 Mines\n\t 3. Advanced  – 24 x 24 Board and 99 Mines";
 	std::cout << "\t>> ";
 	std::getline(std::cin, input);
 
 	if ((input == "1") || (input == "2") || (input == "3"))
-		break;
+		userLevel = stoi(input);
 	else {
 		std::cout << "Invalid input. Try again!\n" << std::endl;
 
@@ -168,6 +170,9 @@ void UserInterface::chooseDifficultyLevel()
 }
 
 void UserInterface::displayResult(std::string name)
+{
+	std::cout << "\n\t\tThe winner is... " << name << std::endl;
+}
 
 int UserInterface::takeNumber(int rangeStart, int rangeEnd) {
 	/// <summary>

@@ -8,7 +8,7 @@ public:
 	void help();
 	void displayWelcomeSign();
 	void displayEndGameSign();
-	void chooseDifficultyLevel();
+	int chooseDifficultyLevel();
 	void displayResult(std:: string name);    // kto wygral z gameHndler + czas rozgrywki 
 	int getDifficultyLevel();
 	static int takeNumber(int rangeStart, int rangeEnd);
