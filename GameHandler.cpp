@@ -9,7 +9,7 @@ void GameHandler::settings() {
 
 	// Zainicjowanie obiektu Board - tablica minesBoard:
 		// rozlosowanie min
-		// ustalenie ilo?ci min w sasiedztwie
+		// ustalenie ilosci min w sasiedztwie
 
 	// Zainicjowanie obiektu Board - tablica currentBoard:
 		// wpisanie zer do ka?dej komórki
