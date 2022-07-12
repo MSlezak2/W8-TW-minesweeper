@@ -1,4 +1,5 @@
 #include "HumanPlayer.h"
+#include <iostream>
 
 HumanPlayer::HumanPlayer()
 {

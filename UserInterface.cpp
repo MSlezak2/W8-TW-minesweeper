@@ -40,6 +40,7 @@ void UserInterface::mainMenu(int choice)
 	switch (choice) {
 
 	case 1:
+		//start gry
 		break;
 
 	case 2:
@@ -89,6 +90,7 @@ void UserInterface::help()
 	std::cout << "\t|       The game ends when all safe squares have been opened.       |" << std::endl;
 	std::cout << "\t|___________________________________________________________________|" << std::endl;
 	std::cout << "\n" << std::endl;
+	system("pause");
 
 }
 
@@ -137,6 +139,7 @@ void UserInterface::displayWelcomeSign()
 		<< "               88     `8b    Y8a.    .a8P  88\"           			 \n"
 		<< "               88      `8b    `" << " Y8888Y" << "'  888888888888  			 \n"
 		<< std::endl;
+	system("pause");
 }
 
 void UserInterface::displayEndGameSign()
@@ -147,7 +150,7 @@ void UserInterface::displayEndGameSign()
 	std::cout << " \\ \\  ____  \\ \\  __ \\  \\ \\  __  \\  \\ \\   __\\     \\ \\  \\_\\ \\  \\ \\ \\ \\ \\  \\ \\   __\\   \\ \\   _/        \n";
 	std::cout << "  \\ \\ ____\\\  \\ \\_\\ \\_\\  \\ \\_\\ \\ _\\  \\  \\_____\\    \\ \\______\\  \\ \\_\\_\\ \\  \\ \\______\\  \\_\\_\\ _\\      \n";
 	std::cout << "   \\/______/  \\/_/\\/_/   \\/_/ \\/_/   \\/______/     \\/______/   \\/_____/   \\/______/   \\/_/\\/_/     \n";
-
+	system("pause");
 }
 
 int UserInterface::chooseDifficultyLevel()
@@ -167,6 +170,7 @@ int UserInterface::chooseDifficultyLevel()
 		system("pause");
 		system("cls");
 	}
+	return userLevel;
 }
 
 void UserInterface::displayResult(std::string name)

@@ -11,8 +11,10 @@ int main() {
 
 	UserInterface obj;
 
-	//obj.mainMenu();
+	obj.help();
 
+
+	ComputerPlayer komp();
 
 
 
