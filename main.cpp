@@ -11,11 +11,11 @@ int main() {
 
 	UserInterface obj;
 
-	obj.help();
+	
 
+	obj.displayBoard();
 
-
-
+	system("pause");
 
 
 

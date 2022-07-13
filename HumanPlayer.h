@@ -6,4 +6,5 @@ class HumanPlayer : public Player {
 
 public:
 	HumanPlayer();
+
 };

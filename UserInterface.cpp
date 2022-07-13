@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include "UserInterface.h"
 
 void UserInterface::welcomeScreen()
@@ -210,18 +211,49 @@ void UserInterface::gameMode()
 {
 	std::string input;
 	std::cout << "Please choose game mode: \n\t 0. Human Player \n\t 1. Computer Player" << std::endl;
-	
+	/*
 	std::cout << "\t>> ";
 	std::getline(std::cin, input);
 
-	if ((input == "0") || (input == "1"))
-		mode = stoi(input);
+	if ((input == "0") || (input == "1"))*/
+		/*mode = stoi(input);*/
+	mode = takeNumber(0, 1);
 }
 
 void UserInterface::displayBoard()
 {
+	int rozX = 9, rozY = 9;
+	std::vector <std::vector<int>> vec(rozY, std::vector<int>(rozX,0));
 
+	vec[0][0] = -1;
+	vec[0][1] = -2;
+	vec[0][2] = -3;
+	vec[0][3] = 7;
 
+	for (int i = 0; i < rozY; i++){ 
+		for (int j = 0; j < rozX; j++) {
+			switch (vec[i][j])
+			{
+			case -1:
+				std::cout << 'M';
+				break;
+			case -2:
+				std::cout << 'F';
+				break;
+			case -3:
+				std::cout << ' ';
+				break;
+			default:
+				std::cout << vec[i][j];
+				break;
+			}
+			std::cout << " | ";
+		}
+		std::cout << std::endl;
+
+		printHorizontalLine(rozX);
+	}
+		
 
 }
 
@@ -281,4 +313,13 @@ char UserInterface::takeLetter(char rangeStart, char rangeEnd) {
 		}
 	} while (letter < rangeStart || letter > rangeEnd);
 	return letter;
+}
+
+void UserInterface::printHorizontalLine(int boardSize)
+{
+	int numberOfHypens = boardSize;
+
+	for (int i = 0; i < numberOfHypens-1; i++)
+		std::cout << "--|-";
+	std::cout << "--|\n";				
 }

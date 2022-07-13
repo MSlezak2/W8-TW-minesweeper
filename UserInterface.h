@@ -10,7 +10,7 @@ public:
 	void displayEndGameSign();
 	int chooseDifficultyLevel();
 	void displayResult(std:: string name);    // kto wygral z gameHndler + czas rozgrywki 
-	int getDifficultyLevel();
+	//int getDifficultyLevel();
 	void gameMode();
 	void displayBoard();
 	static int takeNumber(int rangeStart, int rangeEnd);
@@ -19,4 +19,5 @@ public:
 private:
 	int choice;   //  Menu :: 1 start . 2 help 3. exit
 	bool mode;   // 0 - human  1 -computer
+	void printHorizontalLine(int boardSize);
 };
