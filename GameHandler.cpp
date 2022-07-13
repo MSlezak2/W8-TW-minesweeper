@@ -3,8 +3,12 @@
 void GameHandler::settings() {
 	// TODO: Main menu
 
+	// pobranie wspolrzednych od uzytkownika
+	
+
 	// Zainicjowac obiekt player
 
+	
 	// Wybor poziomu trudnosci
 
 	// Zainicjowanie obiektu Board - tablica minesBoard:
