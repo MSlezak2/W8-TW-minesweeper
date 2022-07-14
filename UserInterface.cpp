@@ -186,17 +186,17 @@ int UserInterface::chooseDifficultyLevel()
 
 void UserInterface::displayResult(std::string name)        // funkcja przyjmuje start zegara i stop jako argumenty
 {
-	std::cout << "\n\t\tThe winner is... " << name << std::endl;
+	//std::cout << "\n\t\tThe winner is... " << name << std::endl;
 
-	clock_t start, stop;      // to trzeba zaicludowac do game loop 
-	float game_duration;
+	//clock_t start, stop;      // to trzeba zaicludowac do game loop 
+	//float game_duration;
 
-	game_duration = (float)(stop - start) / CLOCKS_PER_SEC;
-	int game_duration_min = game_duration / 60;
-	float game_duration_sec = (int)game_duration % 60;
+	//game_duration = (float)(stop - start) / CLOCKS_PER_SEC;
+	//int game_duration_min = game_duration / 60;
+	//float game_duration_sec = (int)game_duration % 60;
 
 
-	printf("Game duration: %d minutes and %.f seconds. ", game_duration_min, game_duration_sec);
+	//printf("Game duration: %d minutes and %.f seconds. ", game_duration_min, game_duration_sec);
 
 }
 
@@ -316,21 +316,3 @@ void UserInterface::printHorizontalLine(int boardSize)
 	std::cout << "--|\n";
 }
 
-std::vector<int> UserInterface::chooseCoordinate(int difficultLevel)
-{
-	std::vector<int> coordinate;
-	int numberRangeStart{ 1 }, inputNumber{};
-	char letterRangeStart{ 'A' }, inputLetter{};
-	int numberRangeEnd = numberRangeStart + difficultLevel - 1;
-	char letterRangeEnd = letterRangeStart + difficultLevel - 1;
-
-	std::cout << "Please enter a row ( " << letterRangeStart << " " << letterRangeEnd << " ): " << std::endl;
-	inputLetter = takeLetter(letterRangeStart, letterRangeEnd);
-	coordinate.push_back((inputLetter - 65));
-
-	std::cout << "Please enter a column ( " << numberRangeStart << " " << numberRangeEnd << " ): " << std::endl;
-	inputNumber = takeNumber(numberRangeStart, numberRangeEnd);
-	coordinate.push_back((inputNumber - 1));
-
-	return  coordinate;
-}

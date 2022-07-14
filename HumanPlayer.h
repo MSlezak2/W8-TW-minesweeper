@@ -6,5 +6,6 @@ class HumanPlayer : public Player {
 
 public:
 	HumanPlayer();
+	std::vector<int> chooseCoordinate();
 
 };
