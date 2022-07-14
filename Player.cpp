@@ -13,6 +13,10 @@ Board Player::getBoard() {
 	return board;
 }
 
+std::string Player::getName() {
+	return name;
+}
+
 void Player::setBoard(Board board) {
 	this->board = board;
 }

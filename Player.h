@@ -12,6 +12,7 @@ public:
 	virtual std::vector <int> chooseCoordinates() = 0;
 	void setDifficultyLevel(int x) ;
 	Board getBoard();
+	std::string getName();
 	void setBoard(Board board);
 	void settleMines();
 

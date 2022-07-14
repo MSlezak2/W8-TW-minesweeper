@@ -1,4 +1,5 @@
 #include "GameHandler.h"
+#include <windows.h>
 
 void GameHandler::settings(/*Player* player*/) {
 	
@@ -21,6 +22,8 @@ void GameHandler::gameLoop() {
 	userInterface.displayBoard(player->getBoard());
 	std::cout << std::endl;
 	player->getBoard().cheatMinesWeeper();
+
+	clock_t start = clock();
 
 	while ((!player->getBoard().checkWin() || whichMove == 0) && !steppedOnAMine) {
 
@@ -45,6 +48,15 @@ void GameHandler::gameLoop() {
 		userInterface.displayBoard(player->getBoard());
 		std::cout << std::endl;
 		player->getBoard().cheatMinesWeeper();
+	}
+
+	if (steppedOnAMine) {
+		Sleep(3000);
+		userInterface.displayEndGameSign();
+	} else {
+		clock_t stop = clock();
+		Sleep(3000);
+		userInterface.displayResult(player->getName(), start, stop);
 	}
 }
 

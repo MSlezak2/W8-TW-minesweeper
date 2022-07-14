@@ -6,7 +6,7 @@
 
 void UserInterface::welcomeScreen()
 {
-	system("Color F0"); // TODO: Should we move it somewhere else (so that the screen doesn't flicker)?
+	system("Color F0");
 	system("cls");
 
 	std::cout << "\n\n\t\tWelcome to Minesweeper Game!\n"
@@ -167,19 +167,19 @@ int UserInterface::chooseDifficultyLevel()
 	return userLevel;
 }
 
-void UserInterface::displayResult(std::string name)        // funkcja przyjmuje start zegara i stop jako argumenty
+void UserInterface::displayResult(std::string name, clock_t start, clock_t stop)        // funkcja przyjmuje start zegara i stop jako argumenty
 {
-	//std::cout << "\n\t\tThe winner is... " << name << std::endl;
+	system("cls");
+	std::cout << "\n\t\tThe winner is... " << name << std::endl;
 
-	//clock_t start, stop;      // to trzeba zaicludowac do game loop 
-	//float game_duration;
+	float game_duration;
 
-	//game_duration = (float)(stop - start) / CLOCKS_PER_SEC;
-	//int game_duration_min = game_duration / 60;
-	//float game_duration_sec = (int)game_duration % 60;
+	game_duration = (float)(stop - start) / CLOCKS_PER_SEC;
+	int game_duration_min = game_duration / 60;
+	float game_duration_sec = (int)game_duration % 60;
 
 
-	//printf("Game duration: %d minutes and %.f seconds. ", game_duration_min, game_duration_sec);
+	printf("Game duration: %d minutes and %.f seconds. ", game_duration_min, game_duration_sec);
 
 }
 
@@ -193,7 +193,7 @@ void UserInterface::gameMode()
 void UserInterface::displayBoard(Board board)
 {
 	int rozX = board.size , rozY = rozX;
-	char mine = 15, flag = 201, a = 65;
+	char mine = 15, flag = 201, a = 65, empty = 254;
 	
 	std::cout << "\n\n\t   ";
 	for (int i = 1; i <= rozX; i++) {
@@ -221,8 +221,8 @@ void UserInterface::displayBoard(Board board)
 			case -2:
 				std::cout << flag;
 				break;
-			case -3:
-				std::cout << ' ';
+			case 0:
+				std::cout << empty;
 				break;
 			case 9:
 				std::cout << '?';
@@ -269,7 +269,6 @@ int UserInterface::takeNumber(int rangeStart, int rangeEnd) {
 
 	return number;
 	//TODO: What if rangeStart > rangeEnd
-
 }
 
 char UserInterface::takeLetter(char rangeStart, char rangeEnd) {

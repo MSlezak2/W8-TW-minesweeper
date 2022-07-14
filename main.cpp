@@ -15,6 +15,4 @@ int main() {
 	gameHandler.settings();
 	gameHandler.gameLoop();
 
-	system("pause");
-
 }
