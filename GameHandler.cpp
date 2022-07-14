@@ -4,39 +4,38 @@ void GameHandler::settings(/*Player* player*/) {
 	
 // Main menu (start game / help / exit)
 	userInterface.mainMenu(); // TODO: Make it prettier (console should be cleared before "new frame") and test it further
-
-// Zainicjowac obiekt player
-	//player = HumanPlayer();
 	
 // Wybor poziomu trudnosci
 	int difficultyLevel = userInterface.chooseDifficultyLevel();
-	player->setDifficultyLevel(difficultyLevel);
+
+// Zainicjowac obiekt player
+	player = new HumanPlayer(difficultyLevel);
 }
 
 void GameHandler::gameLoop() {
 
-	while (/*sprawdzanie warunku zako?czenia gry*/ true) {
+	std::vector<int> chosenCoordinates;
+	int whichMove = 0;
 
-	// wyswietlanie tablicy
-		
+	while (!player->getBoard().checkWin() || whichMove == 0) {
 
-		// wybor czynnosci (flaga czy normalne klikniecie)
+		// wyswietlanie tablicy
+		userInterface.displayBoard();
+
+		// wybor czynnosci (flaga czy normalne klikniecie) (opcjonalnie)
 
 		// pobranie wspolrzednych od uzytkownika
+		chosenCoordinates = player->chooseCoordinates();
 
 		// pierwszy ruch?
-			//tak:
-			// Zainicjowanie obiektu Board - tablica minesBoard:
-				// rozlosowanie min
-				// ustalenie ilosci min w sasiedztwie
-
-			//nie:
+		if (++whichMove == 1) {
+			player->settleMines(); // rozlosowanie min, ustalenie ilosci min w sasiedztwie
+		} else {
 			// sprawdzenie czy weszlismy na mine
-				// tak:
+			if (player->getBoard().isThereAMine(chosenCoordinates[0], chosenCoordinates[1])) { // TODO: Make sure that the order is correct
 				// wyswietlenie "X" (symbolu miny) w tym miejscu (wpisanie -1 do currentBoard)
-				// przegrana
-
-				// nie:
+				// przegrana // TODO: Implement...
+			} else {
 				// sprawdzenie ilosci min w sasiedztwie:
 					// zero:
 					// wyswietlenie puste pole (wpisanie -3 do currentBoard)
@@ -44,6 +43,8 @@ void GameHandler::gameLoop() {
 
 					// rozna od zera:
 					// wyswietlenie ilosci min w sasiedztwie (wpisanie ... do currentBoard)
+			}	
+		}
 	}
 }
 

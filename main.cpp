@@ -12,7 +12,8 @@ int main() {
 	//Player* player = nullptr;
 
 	GameHandler gameHandler;
-	gameHandler.settings(/*player*/);
+	gameHandler.settings();
+	gameHandler.gameLoop();
 
 	system("pause");
 

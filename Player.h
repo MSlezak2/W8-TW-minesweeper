@@ -11,6 +11,8 @@ public:
 	Player();
 	virtual std::vector <int> chooseCoordinates() = 0;
 	void setDifficultyLevel(int x) ;
+	Board getBoard();
+	void settleMines();
 
 protected:
 	Board board;

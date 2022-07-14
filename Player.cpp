@@ -6,5 +6,13 @@ Player::Player() {
 
 void Player::setDifficultyLevel(int x)
 {
-	difficultyLevel = x;
+	this->difficultyLevel = x;
+}
+
+Board Player::getBoard() {
+	return board;
+}
+
+void Player::settleMines() {
+	board.settleMines(difficultyLevel);
 }

@@ -268,7 +268,7 @@ int UserInterface::takeNumber(int rangeStart, int rangeEnd) {
 	/// <param name="rangeEnd"></param>
 	/// <returns>Validated integer number provided by user</returns>
 	/// 
-	int number;
+	int number = HUGE_VAL;
 	std::string userInput;
 
 	do {

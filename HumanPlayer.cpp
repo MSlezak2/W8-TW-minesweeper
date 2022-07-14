@@ -1,4 +1,5 @@
 #include "HumanPlayer.h"
+#include "UserInterface.h"
 #include <iostream>
 
 HumanPlayer::HumanPlayer(int difficultyLevel) {
@@ -10,7 +11,8 @@ HumanPlayer::HumanPlayer(int difficultyLevel) {
 
 	board = Board(difficultyLevel);
 }
-std::vector<int> HumanPlayer::chooseCoordinate()
+
+std::vector<int> HumanPlayer::chooseCoordinates()
 {
 	std::vector<int> coordinate;
 	int numberRangeStart{ 1 }, inputNumber{};
