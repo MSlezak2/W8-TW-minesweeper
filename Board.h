@@ -5,7 +5,7 @@ class Board {
 public:
 	int size{};
 	int mines{};
-	int markedAreas{};
+	//int markedAreas{};
 	std::vector<std::vector<int>> currentBoard;
 	std::vector<std::vector<int>> minesBoard;
 
@@ -17,6 +17,9 @@ public:
 	bool checkWin();
 	bool displayAreas(int x, int y);
 	bool checkingRange(int x, int y);
-	//void cheatMinesWeeper();
+	void cheatMinesWeeper();
+	
+	int howManyLeftToReveal();
+
 };
 

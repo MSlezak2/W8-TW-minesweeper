@@ -12,38 +12,50 @@ void GameHandler::settings(/*Player* player*/) {
 void GameHandler::gameLoop() {
 
 	std::vector<int> chosenCoordinates;
+	int x, y;
 	int whichMove = 0;
+	bool steppedOnAMine = false;
 
-	while (!player->getBoard().checkWin() || whichMove == 0) {
+	// wyswietlanie tablicy
+	system("cls");
+	userInterface.displayBoard(player->getBoard());
+	std::cout << std::endl;
+	player->getBoard().cheatMinesWeeper();
 
-		system("cls");
-		// wyswietlanie tablicy
-		userInterface.displayBoard(player->getBoard());
-
-		// wybor czynnosci (flaga czy normalne klikniecie) (opcjonalnie)
+	while ((!player->getBoard().checkWin() || whichMove == 0) && !steppedOnAMine) {
 
 		// pobranie wspolrzednych od uzytkownika
 		chosenCoordinates = player->chooseCoordinates();
+		x = chosenCoordinates[0];
+		y = chosenCoordinates[1];
 
 		// pierwszy ruch?
 		if (++whichMove == 1) {
-			player->settleMines(); // rozlosowanie min, ustalenie ilosci min w sasiedztwie
+			do {
+				player->settleMines(); // rozlosowanie min, ustalenie ilosci min w sasiedztwie
+			} while ( player->getBoard().isThereAMine(x, y) );
+			steppedOnAMine = handleMove(x, y);
 		} else {
 			// sprawdzenie czy weszlismy na mine
-			if (player->getBoard().isThereAMine(chosenCoordinates[0], chosenCoordinates[1])) { // TODO: Make sure that the order is correct
-				// wyswietlenie "X" (symbolu miny) w tym miejscu (wpisanie -1 do currentBoard)
-				// przegrana // TODO: Implement...
-			} else {
-				// sprawdzenie ilosci min w sasiedztwie:
-					// zero:
-					// wyswietlenie puste pole (wpisanie -3 do currentBoard)
-					// odwiedzenie wszystkich sasiednich komorek (rekurencja)
-
-					// rozna od zera:
-					// wyswietlenie ilosci min w sasiedztwie (wpisanie ... do currentBoard)
-			}	
+			steppedOnAMine = handleMove(x, y);
 		}
+
+		// wyswietlanie tablicy
+		system("cls");
+		userInterface.displayBoard(player->getBoard());
+		std::cout << std::endl;
+		player->getBoard().cheatMinesWeeper();
 	}
+}
+
+bool GameHandler::handleMove(int x, int y) {
+	
+	bool steppedOnAMine;
+	Board tempBoard = player->getBoard();
+	steppedOnAMine = tempBoard.displayAreas(x, y);
+	player->setBoard(tempBoard);
+
+	return steppedOnAMine;
 }
 
 void GameHandler::results() {

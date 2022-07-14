@@ -11,4 +11,5 @@ public:
 private:
 	Player* player; // TODO: Make sure if there's no other (more elegant) way to do it
 	UserInterface userInterface;
+	bool handleMove(int x, int y);
 };

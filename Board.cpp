@@ -6,6 +6,7 @@
 Board::Board() {}
 
 Board::Board(int size) {
+	//markedAreas = 0;
 	this->size = size;
 	std::vector<std::vector<int>> tempBoard(size, std::vector<int>(size));
 	minesBoard.assign(tempBoard.begin(), tempBoard.end());
@@ -74,16 +75,17 @@ void Board::checkNeighbouringArea() {
 	}
 }
 bool Board::checkWin() {
-	return (markedAreas == size * size - mines) ? true : false;
+	return (howManyLeftToReveal() == mines) ? true : false;
 }
 bool Board::displayAreas(int x, int y) {
 	if (isThereAMine(x, y)) {
 		currentBoard[x][y] = -1;
-		return false;
-	}
-	if (!isThereAMine(x,y)) {
+		return true;
+	} else
+/*	if (!isThereAMine(x,y)) */{
 		if (minesBoard[x][y] == 0 &&  currentBoard[x][y] == 9) {
 			currentBoard[x][y] = minesBoard[x][y];
+			//markedAreas++;
 			for (int i = -1; i < 2; i++) {
 				for (int j = -1; j < 2; j++) {
 					if (checkingRange(x + i, y + j)&&(i!=0 || j!=0)) {
@@ -94,9 +96,9 @@ bool Board::displayAreas(int x, int y) {
 		}
 		else {
 			currentBoard[x][y] = minesBoard[x][y]; 
-			markedAreas++;
+			//markedAreas++;
 		}
-		return true;
+		return false;
 	}
 } 
 bool Board::checkingRange(int x, int y) {
@@ -107,19 +109,33 @@ bool Board::checkingRange(int x, int y) {
 		return false;
 	}
 }
-//void Board::cheatMinesWeeper() {
-//	for (int i = 0; i < size; i++) {
-//		for (int j = 0; j < size; j++) {
-//			if (minesBoard[i][j] < 0) {
-//				std::cout << "B" << " ";
-//			}
-//			else {
-//				std::cout << "0" << " ";
-//			}
-//		}
-//		std::cout << std::endl;
-//	}
-//}
+int Board::howManyLeftToReveal() {
+
+	int howManyLeftToReveal = 0;
+
+	for (auto row : currentBoard) {
+		for (auto tile : row) {
+			if (tile == 9) {
+				howManyLeftToReveal++;
+			}
+		}
+	}
+	
+	return howManyLeftToReveal;
+}
+void Board::cheatMinesWeeper() {
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			if (minesBoard[i][j] < 0) {
+				std::cout << "B" << " ";
+			}
+			else {
+				std::cout << "0" << " ";
+			}
+		}
+		std::cout << std::endl;
+	}
+}
 
 
 

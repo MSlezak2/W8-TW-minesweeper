@@ -224,6 +224,9 @@ void UserInterface::displayBoard(Board board)
 			case -3:
 				std::cout << ' ';
 				break;
+			case 9:
+				std::cout << '?';
+				break;
 			default:
 				std::cout << board.currentBoard[i][j];
 				break;
@@ -250,7 +253,6 @@ int UserInterface::takeNumber(int rangeStart, int rangeEnd) {
 
 	do {
 		std::cin >> userInput;
-		exitChoice(userInput);
 		try {
 			number = std::stoi(userInput);
 			if (number < rangeStart || number > rangeEnd) {
@@ -280,7 +282,6 @@ char UserInterface::takeLetter(char rangeStart, char rangeEnd) {
 
 	do {
 		std::cin >> userInput;
-		exitChoice(userInput);
 		letter = userInput.at(0);
 		letter = /*(char)*/toupper(letter);
 		if (letter < rangeStart || letter > rangeEnd) {
@@ -299,12 +300,5 @@ void UserInterface::printHorizontalLine(int boardSize)
 		std::cout << "|-----";
 	}
 	std::cout << "|-----|\n";
-}
-
-int UserInterface::exitChoice(std::string x) {
-	
-	int exit = -1;
-	if (x == "exit");
-	return exit;
 }
 
