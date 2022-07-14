@@ -6,8 +6,11 @@
 Board::Board(int size) {
 	this->size = size;
 	std::vector<std::vector<int>> tempBoard(size, std::vector<int>(size));
-	currentBoard.assign(tempBoard.begin(), tempBoard.end());
 	minesBoard.assign(tempBoard.begin(), tempBoard.end());
+	std::vector<int>row(size, 9);
+	for (int i = 0; i < size; i++) {
+		currentBoard.push_back(row);
+	}
 }
 bool Board::isThereAMine(int x, int y) {
 	return (minesBoard[x][y] < 0) ? true : false;
@@ -71,6 +74,59 @@ void Board::checkNeighbouringArea() {
 bool Board::checkWin() {
 	return (markedAreas == size * size - mines) ? true : false;
 }
+bool Board::displayAreas(int x, int y) {
+	if (isThereAMine(x, y)) {
+		currentBoard[x][y] = -1;
+		return false;
+	}
+	if (!isThereAMine(x,y)) {
+		if (minesBoard[x][y] == 0 &&  currentBoard[x][y] == 9) {
+			currentBoard[x][y] = minesBoard[x][y];
+			for (int i = -1; i < 2; i++) {
+				for (int j = -1; j < 2; j++) {
+					if (checkingRange(x + i, y + j)&&(i!=0 || j!=0)) {
+						displayAreas(x + i, y + j);
+						//std::cout << x + i << " " << y + j << " ";
+						//std::cout << checkingRange(x + i, y + j);
+						//std::cout << std::endl;
+						//system("pause");
+					}
+				}
+			}
+			/*if (checkingRange(x - 1, y - 1)) 
+				displayAreas(x - 1, y - 1);
+			
+			if (checkingRange(x - 1, y))
+			displayAreas(x-1, y);
+			if (checkingRange(x - 1, y + 1))
+			displayAreas(x-1, y+1);
+			if (checkingRange(x , y - 1))
+			displayAreas(x, y-1);
+			if (checkingRange(x , y + 1))
+			displayAreas(x, y+1);
+			if (checkingRange(x + 1, y - 1))
+			displayAreas(x+1, y-1);
+			if (checkingRange(x + 1, y ))
+			displayAreas(x+1, y);
+			if (checkingRange(x + 1, y + 1))
+			displayAreas(x+1, y+1);*/
+		}
+		else {
+			currentBoard[x][y] = minesBoard[x][y]; 
+			markedAreas++;
+		}
+		return true;
+	}
+} // zamkniecie funkcji
+bool Board::checkingRange(int x, int y) {
+	if (x >= 0 && y >= 0 && x < currentBoard.size() && y < currentBoard.size()) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+// X - wywolanie, result + czas
 //void Board::cheatMinesWeeper() {
 //	for (int i = 0; i < size; i++) {
 //		for (int j = 0; j < size; j++) {

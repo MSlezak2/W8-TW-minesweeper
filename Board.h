@@ -13,6 +13,8 @@ public:
 	void settleMines(int difficultyLevel); //difficultyLevel (9, 16, 24)
 	void checkNeighbouringArea();
 	bool checkWin();
+	bool displayAreas(int x, int y);
+	bool checkingRange(int x, int y);
 	//void cheatMinesWeeper();
 };
 
