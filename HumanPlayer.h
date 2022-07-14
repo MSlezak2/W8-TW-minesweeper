@@ -5,7 +5,8 @@
 class HumanPlayer : public Player {
 
 public:
-	HumanPlayer();
-	std::vector<int> chooseCoordinate();
+	HumanPlayer(int difficultyLevel);
+	// Inherited via Player
+	virtual std::vector<int> chooseCoordinates() override;
 
 };

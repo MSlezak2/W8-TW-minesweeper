@@ -1,48 +1,54 @@
 #include "GameHandler.h"
 
-void GameHandler::settings() {
-	// TODO: Main menu
-
-	// pobranie wspolrzednych od uzytkownika
+void GameHandler::settings(/*Player* player*/) {
 	
-
-	// Zainicjowac obiekt player
-
+// Main menu (start game / help / exit)
+	userInterface.mainMenu(); // TODO: Make it prettier (console should be cleared before "new frame") and test it further
 	
-	// Wybor poziomu trudnosci
+// Wybor poziomu trudnosci
+	int difficultyLevel = userInterface.chooseDifficultyLevel();
 
-	// Zainicjowanie obiektu Board - tablica minesBoard:
-		// rozlosowanie min
-		// ustalenie ilosci min w sasiedztwie
-
-	// Zainicjowanie obiektu Board - tablica currentBoard:
-		// wpisanie zer do ka?dej komórki
-
+// Zainicjowac obiekt player
+	player = new HumanPlayer(difficultyLevel);
 }
 
 void GameHandler::gameLoop() {
 
-	while (/*sprawdzanie warunku zako?czenia gry*/ true) {
+	std::vector<int> chosenCoordinates;
+	int whichMove = 0;
+
+	while (!player->getBoard().checkWin() || whichMove == 0) {
 
 		// wyswietlanie tablicy
+		userInterface.displayBoard();
 
-		// wybor czynnosci (flaga czy normalne klikniecie)
+		// wybor czynnosci (flaga czy normalne klikniecie) (opcjonalnie)
 
 		// pobranie wspolrzednych od uzytkownika
+		chosenCoordinates = player->chooseCoordinates();
 
-		// sprawdzenie czy weszlismy na mine
-			// tak:
-			// wyswietlenie "X" (symbolu miny) w tym miejscu (wpisanie -1 do currentBoard)
-			// przegrana
+		// pierwszy ruch?
+		if (++whichMove == 1) {
+			player->settleMines(); // rozlosowanie min, ustalenie ilosci min w sasiedztwie
+		} else {
+			// sprawdzenie czy weszlismy na mine
+			if (player->getBoard().isThereAMine(chosenCoordinates[0], chosenCoordinates[1])) { // TODO: Make sure that the order is correct
+				// wyswietlenie "X" (symbolu miny) w tym miejscu (wpisanie -1 do currentBoard)
+				// przegrana // TODO: Implement...
+			} else {
+				// sprawdzenie ilosci min w sasiedztwie:
+					// zero:
+					// wyswietlenie puste pole (wpisanie -3 do currentBoard)
+					// odwiedzenie wszystkich sasiednich komorek (rekurencja)
 
-			// nie:
-			// sprawdzenie ilosci min w sasiedztwie:
-				// zero:
-				// wyswietlenie puste pole (wpisanie -3 do currentBoard)
-				// odwiedzenie wszystkich sasiednich komorek (rekurencja)
-
-				// rozna od zera:
-				// wyswietlenie ilosci min w sasiedztwie (wpisanie ... do currentBoard)
+					// rozna od zera:
+					// wyswietlenie ilosci min w sasiedztwie (wpisanie ... do currentBoard)
+			}	
+		}
 	}
+}
+
+void GameHandler::results() {
+	//UserInterface.displayResults();
 }
 
