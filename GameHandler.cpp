@@ -20,7 +20,7 @@ void GameHandler::gameLoop() {
 	while (!player->getBoard().checkWin() || whichMove == 0) {
 
 		// wyswietlanie tablicy
-		userInterface.displayBoard();
+		userInterface.displayBoard(player->getBoard());
 
 		// wybor czynnosci (flaga czy normalne klikniecie) (opcjonalnie)
 

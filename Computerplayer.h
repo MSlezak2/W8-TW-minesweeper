@@ -6,5 +6,4 @@ class ComputerPlayer : public Player {
 
 public:
 	ComputerPlayer(int getDifficultyLevel());
-	
 };
