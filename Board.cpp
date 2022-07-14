@@ -86,30 +86,9 @@ bool Board::displayAreas(int x, int y) {
 				for (int j = -1; j < 2; j++) {
 					if (checkingRange(x + i, y + j)&&(i!=0 || j!=0)) {
 						displayAreas(x + i, y + j);
-						//std::cout << x + i << " " << y + j << " ";
-						//std::cout << checkingRange(x + i, y + j);
-						//std::cout << std::endl;
-						//system("pause");
 					}
 				}
 			}
-			/*if (checkingRange(x - 1, y - 1)) 
-				displayAreas(x - 1, y - 1);
-			
-			if (checkingRange(x - 1, y))
-			displayAreas(x-1, y);
-			if (checkingRange(x - 1, y + 1))
-			displayAreas(x-1, y+1);
-			if (checkingRange(x , y - 1))
-			displayAreas(x, y-1);
-			if (checkingRange(x , y + 1))
-			displayAreas(x, y+1);
-			if (checkingRange(x + 1, y - 1))
-			displayAreas(x+1, y-1);
-			if (checkingRange(x + 1, y ))
-			displayAreas(x+1, y);
-			if (checkingRange(x + 1, y + 1))
-			displayAreas(x+1, y+1);*/
 		}
 		else {
 			currentBoard[x][y] = minesBoard[x][y]; 
@@ -117,7 +96,7 @@ bool Board::displayAreas(int x, int y) {
 		}
 		return true;
 	}
-} // zamkniecie funkcji
+} 
 bool Board::checkingRange(int x, int y) {
 	if (x >= 0 && y >= 0 && x < currentBoard.size() && y < currentBoard.size()) {
 		return true;
@@ -126,7 +105,6 @@ bool Board::checkingRange(int x, int y) {
 		return false;
 	}
 }
-// X - wywolanie, result + czas
 //void Board::cheatMinesWeeper() {
 //	for (int i = 0; i < size; i++) {
 //		for (int j = 0; j < size; j++) {
