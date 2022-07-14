@@ -197,6 +197,10 @@ void UserInterface::displayBoard(Board board)
 	std::cout << "\n\n\t   ";
 	for (int i = 1; i <= rozX; i++) {
 		std::cout << " " << i << "  ";
+		/*std::cout << " " << i << " ";
+		if (i < 10) {
+			std::cout << " ";
+		}; */
 	}
 	std::cout << "\n";
 
@@ -219,6 +223,9 @@ void UserInterface::displayBoard(Board board)
 				break;
 			case -3:
 				std::cout << ' ';
+				break;
+			case 9:
+				std::cout << '?';
 				break;
 			default:
 				std::cout << board.currentBoard[i][j];
