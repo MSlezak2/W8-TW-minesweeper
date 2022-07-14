@@ -6,33 +6,30 @@
 
 void UserInterface::welcomeScreen()
 {
-	displayWelcomeSign();
 	system("Color F0"); // TODO: Should we move it somewhere else (so that the screen doesn't flicker)?
+	system("cls");
 
 	std::cout << "\n\n\t\tWelcome to Minesweeper Game!\n"
 		"\n\t1. - Press if you want to start the game."
 		"\n\t2. - Press if you want to see the help panel."
-		"\n\t3. - Press to exit the game.\n" << std::endl;
+		"\n\t3. - Press to exit the game.\n\t\t>> ";
 }
 
 int UserInterface::getUserMenuChoice()
 {
-	welcomeScreen();
 	return UserInterface::takeNumber(1, 3);
 }
 
 void UserInterface::mainMenu()
 {
 	int choice = 0;
-	welcomeScreen();
+	bool flag = true;
 
-	while (choice != 3 && choice != 1) {
+	while (flag) {
+	choice = getUserMenuChoice();
 		switch (choice) {
-		case 0:
-			choice = getUserMenuChoice();
-			break;
-
 		case 1:
+			flag = false;
 			//start gry
 			break;
 
@@ -42,17 +39,19 @@ void UserInterface::mainMenu()
 			break;
 
 		case 3:
-			std::cout << "\n\t--- OK, Bye! See you next time! ---\n";
+			flag = false;
+			std::cout << "\n\t--- OK, Bye! See you next time! ---\n\n";
+			system("Pause");
 			exit(0);
 			break;
 		}
 	}
-	
-
 }
 
 void UserInterface::help()
 {
+	system("cls");
+	system("Color 30");
 	std::cout << "\t ___________________________________________________________________" << std::endl;
 	std::cout << "\t|                                                                   |" << std::endl;
 	std::cout << "\t|                           Welcome in help!                        |" << std::endl;
@@ -87,10 +86,12 @@ void UserInterface::help()
 	std::cout << "\t|___________________________________________________________________|" << std::endl;
 	std::cout << "\n" << std::endl;
 	system("pause");
+	welcomeScreen();
 }
 
 void UserInterface::displayWelcomeSign()
 {
+	system("Color 60");
 	std::cout << "   ad88888ba\n"
 		<< "  d8" << "      " << "8b\n"
 		<< "  Y8,\n"
@@ -139,6 +140,7 @@ void UserInterface::displayWelcomeSign()
 void UserInterface::displayEndGameSign()
 {
 	system("cls");
+	system("Color 40");
 	std::cout << "  ______      _____     __   __     ______        ______       _   _     ______      ______    \n";
 	std::cout << " /\\ ____\\   /\\  __ \\   /\\  \\/  \\   /\\  ____\\     /\\   __ \\   /\\ \\ \\ \\   /\\   ___\\   /\\  _  \\     \n";
 	std::cout << " \\ \\  ____  \\ \\  __ \\  \\ \\  __  \\  \\ \\   __\\     \\ \\  \\_\\ \\  \\ \\ \\ \\ \\  \\ \\   __\\   \\ \\   _/        \n";
@@ -150,9 +152,8 @@ void UserInterface::displayEndGameSign()
 int UserInterface::chooseDifficultyLevel()
 {
 	int userLevel = 0;
-	std::cout << "\tPlease choose difficulty level:\n\t1. Begginer – 9 x 9 Board and 10 Mines"
-		"\n\t2. Intermediate – 16 x 16 Board and 40 Mines\n\t 3. Advanced  – 24 x 24 Board and 99 Mines";
-	std::cout << "\t>> ";
+	std::cout << "\n\tPlease choose difficulty level:\n\t1. Begginer (9 x 9 Board and 10 Mines)"
+		"\n\t2. Intermediate (16 x 16 Board and 40 Mines)\n\t3. Advanced (24 x 24 Board and 99 Mines) \n\t\t>> ";
 
 	userLevel = takeNumber(1, 3);
 
@@ -196,7 +197,10 @@ void UserInterface::displayBoard(Board board)
 	
 	std::cout << "\n\n\t   ";
 	for (int i = 1; i <= rozX; i++) {
-		std::cout << " " << i << "  ";
+		if ( i>9 )
+			std::cout << "  " << i << "  ";
+		else
+			std::cout << "  " << i << "   ";
 	}
 	std::cout << "\n";
 
@@ -205,7 +209,7 @@ void UserInterface::displayBoard(Board board)
 	for (int i = 0; i < rozY; i++) {
 		for (int j = 0; j < rozX; j++) {
 			if (j == 0) {
-				std::cout << "\t" << a <<" | ";
+				std::cout << "\t" << a <<" |  ";
 				a++;
 			}
 				
@@ -224,7 +228,7 @@ void UserInterface::displayBoard(Board board)
 				std::cout << board.currentBoard[i][j];
 				break;
 			}
-			std::cout << " | ";
+			std::cout << "  |  ";
 		}
 		std::cout << std::endl;
 		printHorizontalLine(rozX);
@@ -246,6 +250,7 @@ int UserInterface::takeNumber(int rangeStart, int rangeEnd) {
 
 	do {
 		std::cin >> userInput;
+		exitChoice(userInput);
 		try {
 			number = std::stoi(userInput);
 			if (number < rangeStart || number > rangeEnd) {
@@ -262,6 +267,7 @@ int UserInterface::takeNumber(int rangeStart, int rangeEnd) {
 
 	return number;
 	//TODO: What if rangeStart > rangeEnd
+
 }
 
 char UserInterface::takeLetter(char rangeStart, char rangeEnd) {
@@ -274,6 +280,7 @@ char UserInterface::takeLetter(char rangeStart, char rangeEnd) {
 
 	do {
 		std::cin >> userInput;
+		exitChoice(userInput);
 		letter = userInput.at(0);
 		letter = /*(char)*/toupper(letter);
 		if (letter < rangeStart || letter > rangeEnd) {
@@ -289,8 +296,15 @@ void UserInterface::printHorizontalLine(int boardSize)
 	std::cout << "\t  ";
 
 	for (int i = 0; i < numberOfHypens - 1; i++) {
-		std::cout << "|---";
+		std::cout << "|-----";
 	}
-	std::cout << "|---|\n";
+	std::cout << "|-----|\n";
+}
+
+int UserInterface::exitChoice(std::string x) {
+	
+	int exit = -1;
+	if (x == "exit");
+	return exit;
 }
 

@@ -18,6 +18,7 @@ public:
 	static int takeNumber(int rangeStart, int rangeEnd);
 	static char takeLetter(char rangeStart, char rangeEnd);
 	std::vector<int> chooseCoordinate(int difficultLevel);
+	static int exitChoice(std::string x);
 
 	// TODO: Make methods private if possible
 

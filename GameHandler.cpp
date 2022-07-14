@@ -2,13 +2,10 @@
 
 void GameHandler::settings(/*Player* player*/) {
 	
-// Main menu (start game / help / exit)
-	userInterface.mainMenu(); // TODO: Make it prettier (console should be cleared before "new frame") and test it further
-	
-// Wybor poziomu trudnosci
+	userInterface.displayWelcomeSign();
+	userInterface.welcomeScreen();
+	userInterface.mainMenu();
 	int difficultyLevel = userInterface.chooseDifficultyLevel();
-
-// Zainicjowac obiekt player
 	player = new HumanPlayer(difficultyLevel);
 }
 
@@ -19,6 +16,7 @@ void GameHandler::gameLoop() {
 
 	while (!player->getBoard().checkWin() || whichMove == 0) {
 
+		system("cls");
 		// wyswietlanie tablicy
 		userInterface.displayBoard(player->getBoard());
 

@@ -3,7 +3,10 @@
 #include <iostream>
 
 HumanPlayer::HumanPlayer(int difficultyLevel) {
-	std::cout << "Enter your nickname: " << std::endl;
+
+	system("Color 60");
+	system("cls");
+	std::cout << "\n\tEnter your nickname: \n\t>> ";
 	std::cin >> name;
 
 	// Board initialization
@@ -20,11 +23,11 @@ std::vector<int> HumanPlayer::chooseCoordinates()
 	int numberRangeEnd = numberRangeStart + difficultyLevel - 1;
 	char letterRangeEnd = letterRangeStart + difficultyLevel - 1;
 
-	std::cout << "Please enter a row ( " << letterRangeStart << " " << letterRangeEnd << " ): " << std::endl;
+	std::cout << "Please enter a row ( " << letterRangeStart << " - " << letterRangeEnd << " ): \n>> ";
 	inputLetter = UserInterface::takeLetter(letterRangeStart, letterRangeEnd);
 	coordinate.push_back((inputLetter - 65));
 
-	std::cout << "Please enter a column ( " << numberRangeStart << " " << numberRangeEnd << " ): " << std::endl;
+	std::cout << "\nPlease enter a column ( " << numberRangeStart << " - " << numberRangeEnd << " ): \n>> ";
 	inputNumber = UserInterface::takeNumber(numberRangeStart, numberRangeEnd);
 	coordinate.push_back((inputNumber - 1));
 
