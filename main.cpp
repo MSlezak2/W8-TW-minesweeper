@@ -1,22 +1,19 @@
 #include <iostream>
 #include <string>
-#include "Player.h"
-#include "UserInterface.h"
+//#include "Player.h"
+//#include "UserInterface.h"
 #include "GameHandler.h"
-#include "ComputerPlayer.h"
-#include "HumanPlayer.h"
-
 
 int main() {
 
-	UserInterface obj;
+	//UserInterface obj;
+	//obj.displayBoard();
 
-	
+	//Player* player = nullptr;
 
-	obj.displayBoard();
+	GameHandler gameHandler;
+	gameHandler.settings(/*player*/);
 
 	system("pause");
-
-
 
 }

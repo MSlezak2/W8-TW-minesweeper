@@ -6,7 +6,7 @@
 void UserInterface::welcomeScreen()
 {
 	displayWelcomeSign();
-	system("Color F0");
+	system("Color F0"); // TODO: Should we move it somewhere else (so that the screen doesn't flicker)?
 
 	std::cout << "\n\n\t\tWelcome to Minesweeper Game!\n"
 		"\n\t1. - Press if you want to start the game."
@@ -33,23 +33,33 @@ int UserInterface::getUserMenuChoice()
 	return UserInterface::takeNumber(1, 3);
 }
 
-void UserInterface::mainMenu(int choice)
+void UserInterface::mainMenu()
 {
-	switch (choice) {
+	int choice = 0;
+	welcomeScreen();
 
-	case 1:
-		//start gry
-		break;
+	while (choice != 3 && choice != 1) {
+		switch (choice) {
+		case 0:
+			choice = getUserMenuChoice();
+			break;
 
-	case 2:
-		help();
-		break;
+		case 1:
+			//start gry
+			break;
 
-	case 3:
-		std::cout << "\n\t--- OK, Bye! See you next time! ---\n";
-		exit(0);
-		break;
+		case 2:
+			help();
+			choice = 0;
+			break;
+
+		case 3:
+			std::cout << "\n\t--- OK, Bye! See you next time! ---\n";
+			exit(0);
+			break;
+		}
 	}
+	
 
 }
 
