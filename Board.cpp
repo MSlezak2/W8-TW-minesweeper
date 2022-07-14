@@ -3,6 +3,8 @@
 #include<vector> 
 #include<algorithm>
 
+Board::Board() {}
+
 Board::Board(int size) {
 	this->size = size;
 	std::vector<std::vector<int>> tempBoard(size, std::vector<int>(size));

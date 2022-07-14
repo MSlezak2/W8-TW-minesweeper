@@ -5,5 +5,6 @@
 class HumanPlayer : public Player {
 
 public:
-	HumanPlayer();
+	HumanPlayer(int difficultyLevel);
+
 };

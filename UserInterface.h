@@ -7,7 +7,7 @@ class UserInterface {
 public:
 	void welcomeScreen();
 	int getUserMenuChoice();
-	void mainMenu(int choice);
+	void mainMenu();
 	void help();
 	void displayWelcomeSign();
 	void displayEndGameSign();
@@ -18,6 +18,8 @@ public:
 	static int takeNumber(int rangeStart, int rangeEnd);
 	static char takeLetter(char rangeStart, char rangeEnd);
 	std::vector<int> chooseCoordinate(int difficultLevel);
+
+	// TODO: Make methods private if possible
 
 private:
 	int choice;   //  Menu :: 1 start . 2 help 3. exit
