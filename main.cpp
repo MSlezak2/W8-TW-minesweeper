@@ -11,9 +11,10 @@ int main() {
 
 	UserInterface obj;
 
-	
-
-	obj.displayBoard();
+	Board b1(9);
+	b1.settleMines(9);
+	b1.currentBoard = b1.minesBoard;
+	obj.displayBoard(b1);
 
 	system("pause");
 

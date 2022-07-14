@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "UserInterface.h"
+#include "Board.h"
 
 void UserInterface::welcomeScreen()
 {
@@ -16,19 +17,6 @@ void UserInterface::welcomeScreen()
 
 int UserInterface::getUserMenuChoice()
 {
-	/*std::string input{};
-	while (true) {
-		welcomeScreen();
-		std::cout << "\t>> ";
-		std::getline(std::cin, input);
-		if ((input == "1") || (input == "2") || (input == "3"))
-			break;
-		else {
-			std::cout << "Invalid input. Try again!\n" << std::endl;
-			system("pause");
-			system("cls");
-		}
-	}*/
 	welcomeScreen();
 	return UserInterface::takeNumber(1, 3);
 }
@@ -50,7 +38,6 @@ void UserInterface::mainMenu(int choice)
 		exit(0);
 		break;
 	}
-
 }
 
 void UserInterface::help()
@@ -89,12 +76,10 @@ void UserInterface::help()
 	std::cout << "\t|___________________________________________________________________|" << std::endl;
 	std::cout << "\n" << std::endl;
 	system("pause");
-
 }
 
 void UserInterface::displayWelcomeSign()
 {
-
 	std::cout << "   ad88888ba\n"
 		<< "  d8" << "      " << "8b\n"
 		<< "  Y8,\n"
@@ -153,25 +138,11 @@ void UserInterface::displayEndGameSign()
 
 int UserInterface::chooseDifficultyLevel()
 {
-	//std::string input;
 	int userLevel = 0;
 	std::cout << "\tPlease choose difficulty level:\n\t1. Begginer – 9 x 9 Board and 10 Mines"
 		"\n\t2. Intermediate – 16 x 16 Board and 40 Mines\n\t 3. Advanced  – 24 x 24 Board and 99 Mines";
 	std::cout << "\t>> ";
-	/*std::getline(std::cin, input);
-	if ((input == "1") || (input == "2") || (input == "3"))
-		userLevel = stoi(input);
-	if (userLevel == 1)
-		userLevel = 9;
-	else if (userLevel == 2)
-		userLevel = 16;
-	else if (userLevel == 3)
-		userLevel = 24;
-	else {
-		std::cout << "Invalid input. Try again!\n" << std::endl;
-		system("pause");
-		system("cls");
-	}*/
+
 	userLevel = takeNumber(1, 3);
 
 	if (userLevel == 1)
@@ -195,69 +166,61 @@ void UserInterface::displayResult(std::string name)        // funkcja przyjmuje 
 	int game_duration_min = game_duration / 60;
 	float game_duration_sec = (int)game_duration % 60;
 
-
 	printf("Game duration: %d minutes and %.f seconds. ", game_duration_min, game_duration_sec);
-
 }
 
 void UserInterface::gameMode()
 {
 	std::string input;
 	std::cout << "Please choose game mode: \n\t 0. Human Player \n\t 1. Computer Player" << std::endl;
-	/*
-	std::cout << "\t>> ";
-	std::getline(std::cin, input);
-	if ((input == "0") || (input == "1"))*/
-	/*mode = stoi(input);*/
 	mode = takeNumber(0, 1);
 }
 
-void UserInterface::displayBoard()
+void UserInterface::displayBoard(Board board)
 {
-	int rozX = 9, rozY = 9;
-	std::vector <std::vector<int>> vec(rozY, std::vector<int>(rozX, 0));
+	int rozX = board.size , rozY = rozX;
+	char mine = 15, flag = 201, a = 65;
+	
+	std::cout << "\n\n\t   ";
+	for (int i = 1; i <= rozX; i++) {
+		std::cout << " " << i << "  ";
+	}
+	std::cout << "\n";
 
-	vec[0][0] = -1;
-	vec[0][1] = -2;
-	vec[0][2] = -3;
-	vec[0][3] = 7;
+	printHorizontalLine(rozX);
 
 	for (int i = 0; i < rozY; i++) {
 		for (int j = 0; j < rozX; j++) {
-			switch (vec[i][j])
+			if (j == 0) {
+				std::cout << "\t" << a <<" | ";
+				a++;
+			}
+				
+			switch (board.currentBoard[i][j])
 			{
 			case -1:
-				std::cout << 'M';
+				std::cout << mine;
 				break;
 			case -2:
-				std::cout << 'F';
+				std::cout << flag;
 				break;
 			case -3:
 				std::cout << ' ';
 				break;
 			default:
-				std::cout << vec[i][j];
+				std::cout << board.currentBoard[i][j];
 				break;
 			}
 			std::cout << " | ";
 		}
 		std::cout << std::endl;
-
 		printHorizontalLine(rozX);
 	}
-
-
+	std::cout << "\n";
 }
 
 int UserInterface::takeNumber(int rangeStart, int rangeEnd) {
-	/// <summary>
-	/// Prompts user to input a number from rangeStart to rangeEnd (both inclusive). If given number
-	/// is out of defined range or is not a number, it keeps asking.
-	/// </summary>
-	/// <param name="rangeStart"></param>
-	/// <param name="rangeEnd"></param>
-	/// <returns>Validated integer number provided by user</returns>
-	/// 
+
 	int number;
 	std::string userInput;
 
@@ -282,14 +245,7 @@ int UserInterface::takeNumber(int rangeStart, int rangeEnd) {
 }
 
 char UserInterface::takeLetter(char rangeStart, char rangeEnd) {
-	/// <summary>
-		/// Prompts user to input a letter from rangeStart to rangeEnd (both inclusive). It is case insensitive 
-		/// and returned letter is always capitalized. If given character is out of defined range it keeps asking. 
-		/// </summary>
-		/// <param name="rangeStart"></param>
-		/// <param name="rangeEnd"></param>
-		/// <returns>Capital letter within defined range provided by the user</returns>
-		/// 
+	
 	char letter;
 	std::string userInput;
 
@@ -310,10 +266,12 @@ char UserInterface::takeLetter(char rangeStart, char rangeEnd) {
 void UserInterface::printHorizontalLine(int boardSize)
 {
 	int numberOfHypens = boardSize;
+	std::cout << "\t  ";
 
-	for (int i = 0; i < numberOfHypens - 1; i++)
-		std::cout << "--|-";
-	std::cout << "--|\n";
+	for (int i = 0; i < numberOfHypens - 1; i++) {
+		std::cout << "|---";
+	}
+	std::cout << "|---|\n";
 }
 
 std::vector<int> UserInterface::chooseCoordinate(int difficultLevel)

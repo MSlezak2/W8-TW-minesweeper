@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Board.h"
+
 class UserInterface {
 public:
 	void welcomeScreen();
@@ -11,9 +13,8 @@ public:
 	void displayEndGameSign();
 	int chooseDifficultyLevel();
 	void displayResult(std:: string name);    // kto wygral z gameHndler + czas rozgrywki 
-	//int getDifficultyLevel();
 	void gameMode();
-	void displayBoard();
+	void displayBoard(Board board);
 	static int takeNumber(int rangeStart, int rangeEnd);
 	static char takeLetter(char rangeStart, char rangeEnd);
 	std::vector<int> chooseCoordinate(int difficultLevel);
