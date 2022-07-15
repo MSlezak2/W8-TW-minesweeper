@@ -149,6 +149,12 @@ void UserInterface::displayEndGameSign()
 	system("pause");
 }
 
+void UserInterface::displayGameWonSign() {
+	system("cls");
+	system("Color A0");
+	printf("                                                                                                    \n #####  #    #  ######      #    #  #  #    #  #    #  ######  #####       #   ####                 \n   #    #    #  #           #    #  #  ##   #  ##   #  #       #    #      #  #                     \n   #    ######  #####       #    #  #  # #  #  # #  #  #####   #    #      #   ####                 \n   #    #    #  #           # ## #  #  #  # #  #  # #  #       #####       #       #  ###  ###  ### \n   #    #    #  #           ##  ##  #  #   ##  #   ##  #       #   #       #  #    #  ###  ###  ### \n   #    #    #  ######      #    #  #  #    #  #    #  ######  #    #      #   ####   ###  ###  ### \n");
+}
+
 int UserInterface::chooseDifficultyLevel()
 {
 	int userLevel = 0;
@@ -170,7 +176,8 @@ int UserInterface::chooseDifficultyLevel()
 void UserInterface::displayResult(std::string name, clock_t start, clock_t stop)        // funkcja przyjmuje start zegara i stop jako argumenty
 {
 	system("cls");
-	std::cout << "\n\t\tThe winner is... " << name << std::endl;
+	displayGameWonSign();
+	std::cout << "\n\n\t" << name << std::endl;
 
 	float game_duration;
 
@@ -179,8 +186,8 @@ void UserInterface::displayResult(std::string name, clock_t start, clock_t stop)
 	float game_duration_sec = (int)game_duration % 60;
 
 
-	printf("Game duration: %d minutes and %.f seconds. ", game_duration_min, game_duration_sec);
-
+	//printf("Game duration: %d minutes and %.f seconds. ", game_duration_min, game_duration_sec);
+	std::cout << "Game duration : " << game_duration_min << " minutes and " << game_duration_sec << "seconds." << std::endl;
 }
 
 void UserInterface::gameMode()

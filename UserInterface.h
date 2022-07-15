@@ -12,6 +12,7 @@ public:
 	void help();
 	void displayWelcomeSign();
 	void displayEndGameSign();
+	void displayGameWonSign();
 	int chooseDifficultyLevel();
 	void displayResult(std::string name, clock_t start, clock_t stop);    // kto wygral z gameHndler + czas rozgrywki 
 	void gameMode();

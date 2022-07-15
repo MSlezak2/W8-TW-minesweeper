@@ -6,10 +6,11 @@
 Board::Board() {}
 
 Board::Board(int size) {
-	//markedAreas = 0;
 	this->size = size;
+
 	std::vector<std::vector<int>> tempBoard(size, std::vector<int>(size));
 	minesBoard.assign(tempBoard.begin(), tempBoard.end());
+
 	std::vector<int>row(size, 9);
 	for (int i = 0; i < size; i++) {
 		currentBoard.push_back(row);
@@ -81,11 +82,9 @@ bool Board::displayAreas(int x, int y) {
 	if (isThereAMine(x, y)) {
 		currentBoard[x][y] = -1;
 		return true;
-	} else
-/*	if (!isThereAMine(x,y)) */{
+	} else {
 		if (minesBoard[x][y] == 0 &&  currentBoard[x][y] == 9) {
 			currentBoard[x][y] = minesBoard[x][y];
-			//markedAreas++;
 			for (int i = -1; i < 2; i++) {
 				for (int j = -1; j < 2; j++) {
 					if (checkingRange(x + i, y + j)&&(i!=0 || j!=0)) {
@@ -96,7 +95,6 @@ bool Board::displayAreas(int x, int y) {
 		}
 		else {
 			currentBoard[x][y] = minesBoard[x][y]; 
-			//markedAreas++;
 		}
 		return false;
 	}
