@@ -3,23 +3,25 @@
 
 class Board {
 public:
-	int size{};
-	int mines{};
-	//int markedAreas{};
-	std::vector<std::vector<int>> currentBoard;
-	std::vector<std::vector<int>> minesBoard;
 
 	Board();
 	Board(int size);
 	bool isThereAMine(int x, int y);
 	void settleMines(int difficultyLevel); //difficultyLevel (9, 16, 24)
-	void checkNeighbouringArea();
 	bool checkWin();
 	bool displayAreas(int x, int y);
-	bool checkingRange(int x, int y);
 	void cheatMinesWeeper();
-	
 	int howManyLeftToReveal();
+	int getSize();
+	std::vector<std::vector<int>> getCurrentBoard();
 
+private:
+	std::vector<std::vector<int>> currentBoard;
+	std::vector<std::vector<int>> minesBoard;
+	int size{};
+	int mines{};
+
+	void checkNeighbouringArea();
+	bool checkingRange(int x, int y);
 };
 

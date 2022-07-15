@@ -6,7 +6,7 @@ HumanPlayer::HumanPlayer(int difficultyLevel) {
 
 	system("Color 60");
 	system("cls");
-	std::cout << "\n\tEnter your nickname: \n\t>> ";
+	std::cout << "\n\n\t\tEnter your nickname: \n\n\t>> ";
 	std::cin >> name;
 
 	// Board initialization

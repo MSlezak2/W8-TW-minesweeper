@@ -121,6 +121,12 @@ int Board::howManyLeftToReveal() {
 	
 	return howManyLeftToReveal;
 }
+int Board::getSize() {
+	return size;
+}
+std::vector<std::vector<int>> Board::getCurrentBoard() {
+	return currentBoard;
+}
 void Board::cheatMinesWeeper() {
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
@@ -133,6 +139,7 @@ void Board::cheatMinesWeeper() {
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 

@@ -158,7 +158,8 @@ void UserInterface::displayGameWonSign() {
 int UserInterface::chooseDifficultyLevel()
 {
 	int userLevel = 0;
-	std::cout << "\n\tPlease choose difficulty level:\n\t1. Begginer (9 x 9 Board and 10 Mines)"
+	system("cls");
+	std::cout << "\n\n\t\tPlease choose difficulty level:\n\n\t1. Begginer (9 x 9 Board and 10 Mines)"
 		"\n\t2. Intermediate (16 x 16 Board and 40 Mines)\n\t3. Advanced (24 x 24 Board and 99 Mines) \n\t\t>> ";
 
 	userLevel = takeNumber(1, 3);
@@ -199,7 +200,7 @@ void UserInterface::gameMode()
 
 void UserInterface::displayBoard(Board board)
 {
-	int rozX = board.size , rozY = rozX;
+	int rozX = board.getSize(), rozY = rozX;
 	char mine = 15, flag = 201, a = 65, empty = 254;
 	
 	std::cout << "\n\n\t   ";
@@ -220,7 +221,7 @@ void UserInterface::displayBoard(Board board)
 				a++;
 			}
 				
-			switch (board.currentBoard[i][j])
+			switch (board.getCurrentBoard()[i][j])
 			{
 			case -1:
 				std::cout << mine;
@@ -235,7 +236,7 @@ void UserInterface::displayBoard(Board board)
 				std::cout << '?';
 				break;
 			default:
-				std::cout << board.currentBoard[i][j];
+				std::cout << board.getCurrentBoard()[i][j];
 				break;
 			}
 			std::cout << "  |  ";

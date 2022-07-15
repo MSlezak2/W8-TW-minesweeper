@@ -5,11 +5,14 @@
 
 class GameHandler {
 public:
-	void settings(/*Player* player*/);
+	void settings();
 	void gameLoop();
-	void results();
+
+	void displayBoard();
+
 private:
 	Player* player; 
 	UserInterface userInterface;
+	
 	bool handleMove(int x, int y);
 };

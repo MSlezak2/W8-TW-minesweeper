@@ -22,5 +22,5 @@ void Player::setBoard(Board board) {
 }
 
 void Player::settleMines() {
-	board.settleMines(difficultyLevel);
+	board.settleMines(difficultyLevel); // TODO: Ask if correct...
 }
